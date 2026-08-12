@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sneha Gumane | Frontend Developer</title>
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Google Font -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+
+  <style>
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background:
+        radial-gradient(circle at 15% 15%, rgba(139, 92, 246, .22), transparent 28%),
+        radial-gradient(circle at 85% 35%, rgba(59, 130, 246, .18), transparent 30%),
+        radial-gradient(circle at 50% 90%, rgba(236, 72, 153, .14), transparent 30%),
+        #070712;
+      color: #fff;
+      overflow-x: hidden;
+    }
+
+    .serif { font-family: 'Playfair Display', serif; }
+
+    .glass {
+      background: rgba(255,255,255,.075);
+      border: 1px solid rgba(255,255,255,.14);
+      box-shadow: 0 20px 60px rgba(0,0,0,.28);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+    }
+
+    .glass:hover {
+      border-color: rgba(255,255,255,.25);
+    }
+
+    .glow-text {
+      background: linear-gradient(90deg, #fff, #c4b5fd, #93c5fd, #f9a8d4);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .gradient-border {
+      position: relative;
+      padding: 3px;
+      border-radius: 999px;
+      background: linear-gradient(135deg, #a78bfa, #60a5fa, #f472b6);
+    }
+
+    .gradient-border img {
+      border-radius: 999px;
+      display: block;
+    }
+
+    .blob {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(2px);
+      opacity: .35;
+      pointer-events: none;
+      animation: float 8s ease-in-out infinite;
+    }
+
+    .blob.one {
+      width: 180px; height: 180px;
+      background: #8b5cf6;
+      left: -60px; top: 18%;
+    }
+
+    .blob.two {
+      width: 220px; height: 220px;
+      background: #ec4899;
+      right: -80px; top: 45%;
+      animation-delay: -3s;
+    }
+
+    .blob.three {
+      width: 150px; height: 150px;
+      background: #3b82f6;
+      left: 42%; bottom: 3%;
+      animation-delay: -5s;
+    }
+
+    @keyframes float {
+      0%,100% { transform: translate3d(0,0,0) scale(1); }
+      50% { transform: translate3d(0,-25px,0) scale(1.08); }
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity .8s ease, transform .8s ease;
+    }
+
+    .reveal.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .project-card {
+      transform-style: preserve-3d;
+      transition: transform .15s ease, box-shadow .3s ease;
+    }
+
+    .project-card:hover {
+      box-shadow: 0 30px 80px rgba(124,58,237,.18);
+    }
+
+    .project-content {
+      transform: translateZ(35px);
+    }
+
+    .skill {
+      transition: transform .25s ease, background .25s ease;
+    }
+
+    .skill:hover {
+      transform: translateY(-5px);
+      background: rgba(255,255,255,.13);
+    }
+
+    .nav-link {
+      position: relative;
+      color: rgba(255,255,255,.72);
+      transition: color .2s ease;
+    }
+
+    .nav-link:hover { color: #fff; }
+
+    .nav-link::after {
+      content: "";
+      position: absolute;
+      left: 0; bottom: -6px;
+      width: 0; height: 2px;
+      border-radius: 10px;
+      background: linear-gradient(90deg,#a78bfa,#60a5fa);
+      transition: width .25s ease;
+    }
+
+    .nav-link:hover::after { width: 100%; }
+
+    .mobile-menu { display: none; }
+    .mobile-menu.open { display: block; }
+
+    .hero-photo {
+      animation: photoFloat 5s ease-in-out infinite;
+    }
+
+    @keyframes photoFloat {
+      0%,100% { transform: translateY(0) rotate(1deg); }
+      50% { transform: translateY(-9px) rotate(-1deg); }
+    }
+
+    .cursor-glow {
+      position: fixed;
+      width: 300px;
+      height: 300px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(139,92,246,.12), transparent 65%);
+      pointer-events: none;
+      transform: translate(-50%,-50%);
+      z-index: -1;
+    }
+
+    @media (max-width: 768px) {
+      .desktop-nav { display: none; }
+    }
+  </style>
+</head>
+
+<body>
+  <div id="cursorGlow" class="cursor-glow"></div>
+
+  <!-- Decorative background -->
+  <div class="blob one"></div>
+  <div class="blob two"></div>
+  <div class="blob three"></div>
+
+  <!-- NAVBAR -->
+  <header class="fixed top-4 left-0 right-0 z-50 px-4">
+    <nav class="glass max-w-6xl mx-auto rounded-2xl px-5 py-3 flex items-center justify-between">
+      <a href="#home" class="font-bold text-xl tracking-tight">
+        <span class="text-violet-400">Sneha</span> Gumane
+      </a>
+
+      <div class="desktop-nav flex items-center gap-7 text-sm">
+        <a class="nav-link" href="#home">Home</a>
+        <a class="nav-link" href="#about">About</a>
+        <a class="nav-link" href="#skills">Skills</a>
+        <a class="nav-link" href="#projects">Projects</a>
+        <a class="nav-link" href="#contact">Contact</a>
+      </div>
+
+      <a href="#contact" class="hidden sm:block rounded-xl px-4 py-2 text-sm font-semibold bg-white text-black hover:bg-violet-100 transition">
+        Let's Talk
+      </a>
+
+      <button id="menuBtn" class="md:hidden glass rounded-xl px-3 py-2" aria-label="Open menu">☰</button>
+    </nav>
+
+    <div id="mobileMenu" class="mobile-menu glass max-w-6xl mx-auto mt-2 rounded-2xl p-4">
+      <div class="flex flex-col gap-4 text-center">
+        <a href="#home">Home</a>
+        <a href="#about">About</a>
+        <a href="#skills">Skills</a>
+        <a href="#projects">Projects</a>
+        <a href="#contact">Contact</a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+
+    <!-- HERO -->
+    <section id="home" class="min-h-screen flex items-center pt-28 px-5">
+      <div class="max-w-6xl mx-auto w-full grid lg:grid-cols-2 gap-14 items-center">
+
+        <div class="reveal">
+          <div class="inline-flex glass rounded-full px-4 py-2 text-sm text-white/75 mb-6">
+            ✦ Final-Year Computer Science Student
+          </div>
+
+          <h1 class="text-5xl sm:text-6xl lg:text-7xl font-extrabold leading-tight tracking-tight">
+            Hi, I'm <span class="glow-text">Sneha.</span>
+          </h1>
+
+          <h2 class="text-2xl sm:text-3xl font-semibold mt-4 text-white/90">
+            Frontend Developer & UI/UX Enthusiast
+          </h2>
+
+          <p class="text-white/60 text-base sm:text-lg leading-8 mt-6 max-w-xl">
+            I love turning ideas into beautiful, responsive and user-friendly
+            digital experiences with modern frontend technologies.
+          </p>
+
+          <div class="flex flex-wrap gap-4 mt-8">
+            <a href="#projects" class="rounded-xl px-6 py-3 font-semibold bg-white text-black hover:scale-105 transition">
+              View My Work →
+            </a>
+            <a href="#contact" class="glass rounded-xl px-6 py-3 font-semibold hover:bg-white/10 transition">
+              Contact Me
+            </a>
+          </div>
+
+          <div class="flex gap-5 mt-8 text-white/55 text-sm">
+            <a href="https://www.linkedin.com/in/snehagumane" class="hover:text-white transition">LinkedIn ↗</a>
+            <a href="https://github.com/gumanesneha28-web" class="hover:text-white transition">GitHub ↗</a>
+          </div>
+        </div>
+
+        <div class="reveal flex justify-center lg:justify-end">
+          <div class="relative">
+            <div class="absolute -inset-10 rounded-full bg-violet-500/20 blur-3xl"></div>
+
+            <div class="gradient-border hero-photo relative">
+             
+              <img
+                src="assets/s1.jpeg"
+                alt="Sneha"
+                class="w-64 h-64 sm:w-80 sm:h-80 object-cover bg-white/10"
+                onerror="this.src='https://images.unsplash.com/photo-1531123897727-8f129e1688ce?auto=format&fit=crop&w=700&q=80';"
+              >
+            </div>
+
+            <div class="glass absolute -bottom-5 -left-8 rounded-2xl px-5 py-3">
+              <p class="text-xs text-white/50">Currently exploring</p>
+              <p class="font-semibold">Frontend + UI/UX ✨</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ABOUT -->
+    <section id="about" class="py-28 px-5">
+      <div class="max-w-6xl mx-auto">
+        <div class="reveal mb-12">
+          <p class="text-violet-300 text-sm font-semibold uppercase tracking-[.25em]">About Me</p>
+          <h2 class="text-4xl sm:text-5xl font-bold mt-3">A little about me.</h2>
+        </div>
+
+        <div class="grid md:grid-cols-5 gap-6">
+          <div class="glass rounded-3xl p-8 md:col-span-3 reveal">
+            <p class="text-white/65 leading-8">
+              I'm a final-year Computer Science student at
+              <strong class="text-white">Sanghvi College of Engineering</strong>,
+              passionate about frontend development and UI/UX design.
+              I enjoy creating clean interfaces, experimenting with modern
+              web technologies and building experiences that are both
+              visually appealing and easy to use.
+            </p>
+
+            <div class="grid sm:grid-cols-2 gap-4 mt-8">
+              <div class="glass rounded-2xl p-5">
+                <p class="text-white/40 text-sm">Education</p>
+                <p class="font-semibold mt-1">B.E. Computer Science</p>
+              </div>
+              <div class="glass rounded-2xl p-5">
+                <p class="text-white/40 text-sm">Focus</p>
+                <p class="font-semibold mt-1">Frontend + UI/UX</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="glass rounded-3xl p-8 md:col-span-2 reveal">
+            <p class="text-white/40 text-sm">What I enjoy</p>
+            <div class="space-y-5 mt-5">
+              <div>🎨 <span class="ml-2">Designing modern interfaces</span></div>
+              <div>💻 <span class="ml-2">Building responsive websites</span></div>
+              <div>✨ <span class="ml-2">Creating smooth interactions</span></div>
+              <div>🚀 <span class="ml-2">Learning new technologies</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SKILLS -->
+    <section id="skills" class="py-28 px-5">
+      <div class="max-w-6xl mx-auto">
+        <div class="reveal text-center mb-12">
+          <p class="text-violet-300 text-sm font-semibold uppercase tracking-[.25em]">Skills</p>
+          <h2 class="text-4xl sm:text-5xl font-bold mt-3">Tools I work with.</h2>
+        </div>
+
+        <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4">
+          <div class="skill glass rounded-2xl p-6 text-center reveal"><div class="text-3xl">🌐</div><p class="mt-3 font-semibold">HTML</p></div>
+          <div class="skill glass rounded-2xl p-6 text-center reveal"><div class="text-3xl">🎨</div><p class="mt-3 font-semibold">CSS</p></div>
+          <div class="skill glass rounded-2xl p-6 text-center reveal"><div class="text-3xl">⚡</div><p class="mt-3 font-semibold">JavaScript</p></div>
+          <div class="skill glass rounded-2xl p-6 text-center reveal"><div class="text-3xl">💨</div><p class="mt-3 font-semibold">Tailwind</p></div>
+          <div class="skill glass rounded-2xl p-6 text-center reveal"><div class="text-3xl">⚛️</div><p class="mt-3 font-semibold">React</p></div>
+          <div class="skill glass rounded-2xl p-6 text-center reveal"><div class="text-3xl">🖌️</div><p class="mt-3 font-semibold">UI/UX</p></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PROJECTS -->
+    <section id="projects" class="py-28 px-5">
+      <div class="max-w-6xl mx-auto">
+        <div class="reveal mb-12">
+          <p class="text-violet-300 text-sm font-semibold uppercase tracking-[.25em]">Portfolio</p>
+          <h2 class="text-4xl sm:text-5xl font-bold mt-3">Featured projects.</h2>
+          <p class="text-white/55 mt-4 max-w-2xl">
+            A selection of projects showcasing my frontend development,
+            responsive design and UI/UX skills.
+          </p>
+        </div>
+
+        <div class="grid md:grid-cols-2 gap-7">
+
+          <!-- PROJECT 1 -->
+          <article class="project-card glass rounded-3xl p-4 reveal" data-tilt>
+           <div class="h-56 w-full rounded-2xl overflow-hidden bg-black/20">
+  <img 
+    src="assets/op1.png"
+    alt="Student Stress Management Project"
+    class="w-full h-full object-cover object-center transition duration-500 hover:scale-105"
+  >
+</div>
+            <div class="project-content p-4">
+              <div class="flex items-center justify-between gap-4">
+                <h3 class="text-2xl font-bold">Jewellery Shop</h3>
+                <span class="text-xs glass rounded-full px-3 py-1">Web Design</span>
+              </div>
+              <p class="text-white/55 leading-7 mt-3">
+                A modern responsive jewellery shopping website with an elegant
+                Glassmorphism interface, product browsing and interactive UI.
+              </p>
+              <div class="flex flex-wrap gap-2 mt-5">
+                <span class="glass rounded-full px-3 py-1 text-xs">HTML</span>
+                <span class="glass rounded-full px-3 py-1 text-xs">CSS</span>
+                <span class="glass rounded-full px-3 py-1 text-xs">JavaScript</span>
+                <span class="glass rounded-full px-3 py-1 text-xs">Tailwind CSS</span>
+              </div>
+              <div class="flex gap-3 mt-6">
+                <a href="https://gumanesneha28-web.github.io/Jewellery-Shop/" class="glass rounded-xl px-4 py-2 text-sm hover:bg-white/10">Live Demo ↗</a>
+                <a href="https://github.com/gumanesneha28-web" class="glass rounded-xl px-4 py-2 text-sm hover:bg-white/10">GitHub ↗</a>
+              </div>
+            </div>
+          </article>
+
+          <!-- PROJECT 2 -->
+          <article class="project-card glass rounded-3xl p-4 reveal" data-tilt>
+         <div class="h-56 w-full rounded-2xl overflow-hidden bg-black/20">
+  <img 
+    src="assets/op2.png"
+    alt="Student Stress Management Project"
+    class="w-full h-full object-cover object-center transition duration-500 hover:scale-105"
+  >
+</div>
+            <div class="project-content p-4">
+              <div class="flex items-center justify-between gap-4">
+                <h3 class="text-2xl font-bold">Student Stress Management</h3>
+                <span class="text-xs glass rounded-full px-3 py-1">Wellness</span>
+              </div>
+              <p class="text-white/55 leading-7 mt-3">
+                A student-focused platform designed to provide stress-management
+                resources, wellness activities and a simple user-friendly experience.
+              </p>
+              <div class="flex flex-wrap gap-2 mt-5">
+                <span class="glass rounded-full px-3 py-1 text-xs">HTML</span>
+                <span class="glass rounded-full px-3 py-1 text-xs">CSS</span>
+                <span class="glass rounded-full px-3 py-1 text-xs">JavaScript</span>
+                <span class="glass rounded-full px-3 py-1 text-xs">Tailwind CSS</span>
+              </div>
+              <div class="flex gap-3 mt-6">
+                <a href="https://gumanesneha28-web.github.io/Stress_Mgt/" class="glass rounded-xl px-4 py-2 text-sm hover:bg-white/10">Live Demo ↗</a>
+                <a href="https://github.com/gumanesneha28-web" class="glass rounded-xl px-4 py-2 text-sm hover:bg-white/10">GitHub ↗</a>
+              </div>
+            </div>
+          </article>
+
+          <!-- COPY THIS CARD FOR MORE PROJECTS -->
+
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact" class="py-28 px-5">
+      <div class="max-w-6xl mx-auto">
+        <div class="glass rounded-[2rem] p-8 sm:p-12 reveal text-center">
+          <p class="text-violet-300 text-sm font-semibold uppercase tracking-[.25em]">Contact</p>
+          <h2 class="text-4xl sm:text-5xl font-bold mt-4">
+            Let's build something <span class="glow-text">beautiful.</span>
+          </h2>
+          <p class="text-white/55 max-w-xl mx-auto mt-5 leading-7">
+            I'm open to internships, frontend opportunities and exciting
+            projects where I can learn, create and contribute.
+          </p>
+
+          <div class="flex flex-wrap justify-center gap-4 mt-8">
+            <a href="gumanesneha28@gmail.com" class="rounded-xl px-6 py-3 bg-white text-black font-semibold hover:scale-105 transition">
+              Email Me
+            </a>
+            <a href="https://www.linkedin.com/in/snehagumane" class="glass rounded-xl px-6 py-3 font-semibold hover:bg-white/10 transition">
+              LinkedIn ↗
+            </a>
+            <a href="https://github.com/gumanesneha28-web" class="glass rounded-xl px-6 py-3 font-semibold hover:bg-white/10 transition">
+              GitHub ↗
+            </a>
+          </div>
+        </div>
+
+        <footer class="text-center text-white/35 text-sm py-10">
+          © 2025 Sneha Gumane • Designed & Built with ❤️
+        </footer>
+      </div>
+    </section>
+
+  </main>
+
+  <script>
+    // Mobile menu
+    const menuBtn = document.getElementById("menuBtn");
+    const mobileMenu = document.getElementById("mobileMenu");
+
+    menuBtn.addEventListener("click", () => {
+      mobileMenu.classList.toggle("open");
+    });
+
+    mobileMenu.querySelectorAll("a").forEach(link => {
+      link.addEventListener("click", () => mobileMenu.classList.remove("open"));
+    });
+
+    // Scroll reveal
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("show");
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12 });
+
+    document.querySelectorAll(".reveal").forEach(el => observer.observe(el));
+
+    // 3D project card effect
+    document.querySelectorAll("[data-tilt]").forEach(card => {
+      card.addEventListener("mousemove", (e) => {
+        const rect = card.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+
+        const rotateX = ((y / rect.height) - 0.5) * -8;
+        const rotateY = ((x / rect.width) - 0.5) * 8;
+
+        card.style.transform =
+          `perspective(900px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-5px)`;
+      });
+
+      card.addEventListener("mouseleave", () => {
+        card.style.transform =
+          "perspective(900px) rotateX(0) rotateY(0) translateY(0)";
+      });
+    });
+
+    // Cursor glow
+    const glow = document.getElementById("cursorGlow");
+    document.addEventListener("mousemove", (e) => {
+      glow.style.left = e.clientX + "px";
+      glow.style.top = e.clientY + "px";
+    });
+  </script>
+</body>
+</html>
